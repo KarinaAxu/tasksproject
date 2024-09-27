@@ -3,55 +3,70 @@
 {% block title %}Your Tasks{% endblock %}
 
 {% block content %}
+{% load static %}
 <h2>Your Tasks</h2>
-<div class="row">
-    <div class="col-md-4 mb-4">
-        <form method="get" action="{% url 'task_list' %}" class="mb-4">
-            <div class="form-row">
-                <div class="col">
-                    <label for="category">Category:</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="">All</option>
-                        <option value="W">Work</option>
-                        <option value="P">Personal</option>
-                        <option value="U">Urgent</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="priority">Priority:</label>
-                    <select name="priority" id="priority" class="form-control">
-                        <option value="">All</option>
-                        <option value="L">Low</option>
-                        <option value="M">Medium</option>
-                        <option value="H">High</option>
-                    </select>
-                </div>
-                <div class="col align-self-end">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
-            </div>
-        </form>
-        <div class="mb-4">
-            <h4>Completion Percentage: {{ completion_percentage|floatformat:2 }}%</h4>
+<div>
+    <form method="get" action="{% url 'task_list' %}">
+        <div>
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+                <option value="">All</option>
+                <option value="W" {% if request.GET.category == 'W' %}selected{% endif %}>Work</option>
+                <option value="P" {% if request.GET.category == 'P' %}selected{% endif %}>Personal</option>
+                <option value="U" {% if request.GET.category == 'U' %}selected{% endif %}>Urgent</option>
+            </select>
         </div>
-        <ul class="list-group">
-            {% for task in tasks %}
-                <li class="list-group-item">
-                    <h2><a href="{% url 'task_detail' task.pk %}" class="text-decoration-none">{{ task.title }}</a></h2>
-                    <p>{{ task.description }}</p>
-                    <small>Due: {{ task.due_date }}</small>
-                    <span class="badge badge-{{ task.get_priority_display_class }}">{{ task.get_priority_display }}</span>
-                    <span class="badge badge-{{ task.get_status_display_class }}">{{ task.get_status_display }}</span>
-                    </br>
-                    <a href="{% url 'task_update' task.pk %}" class="btn btn-secondary">Edit</a>
-                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">Delete</a>
-                    <a href="{% url 'task_create' %}" class="btn btn-primary">Create New Task</a>
-                </li>
-            {% empty %}
-                <li class="list-group-item">No tasks available.</li>
-                <a href="{% url 'task_create' %}" class="btn btn-primary">Create New Task</a>
-            {% endfor %}
-        </ul>
+        <div>
+            <label for="priority">Priority:</label>
+            <select name="priority" id="priority">
+                <option value="">All</option>
+                <option value="L" {% if request.GET.priority == 'L' %}selected{% endif %}>Low</option>
+                <option value="M" {% if request.GET.priority == 'M' %}selected{% endif %}>Medium</option>
+                <option value="H" {% if request.GET.priority == 'H' %}selected{% endif %}>High</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Filter</button>
+        </div>
+        <div>
+        <button type="submit" name="filter" value="me">Assigned to me</button>
+        </div>
+    </form>
+    <button><a href="{% url 'task_create' %}">Create New Task</a></button>
+<div class="main-start">
+    <h4>Completion Percentage: {{ completion_percentage|floatformat:2 }}%</h4>
+</div>
+<ul class="main-bloc">
+    {% for task in page_obj %}
+        <li class="main-box">
+            <a href="{% url 'task_detail' task.pk %}"><h2>{{ task.title }}</h2></a>
+            <p>{{ task.description }}</p>
+            <small>Due: {{ task.due_date }}</small>
+            <span>{{ task.get_priority_display }}</span>
+            <br>
+            <div>
+                <button><a href="{% url 'task_update' task.pk %}">Edit</a></button>
+                <button><a href="{% url 'task_delete' task.pk %}">Delete</a></button>
+            </div>
+        </li>
+    {% empty %}
+            <li class="no-tasks">No tasks available.</li>
+    {% endfor %}
+</ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a href="?page=1{% if category %}&category={{ category }}{$ endif %}{$ if priority %}&priority={{ priority }}{% endif %}">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if category %}&category={{ category }}{$ endif %}{$ if priority %}&priority={{ priority }}{% endif %}">Previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if category %}&category={{ category }}{$ endif %}{$ if priority %}&priority={{ priority }}{% endif %}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if category %}&category={{ category }}{$ endif %}{$ if priority %}&priority={{ priority }}{% endif %}">Last</a>
+            {% endif %}
+        </span>
     </div>
 </div>
 {% endblock %}

@@ -37,7 +37,7 @@ def register_page(request):
                 return redirect('/tasks/')
     else:
         form = RegisterForm()
-    return render(request, 'user/login.html', {'form': form})
+    return render(request, 'user/register.html', {'form': form})
 
 def logout(request):
     auth_logout(request)
@@ -69,7 +69,7 @@ def forgot_password(request):
                     subject='Reset Your Password',
                     message='',
                     html_message=email_content,
-                    from_email='settings.EMAIL_HOST_USER',
+                    from_email=settings.EMAIL_HOST_USER,
                     recipient_list=[email],
                     fail_silently=False
                 )

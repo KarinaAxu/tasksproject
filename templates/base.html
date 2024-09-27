@@ -1,42 +1,45 @@
-{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Task List{% endblock %}</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'task_list' %}">Task List</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mb-2 mb-lg-0 d-flex justify-content-end align-items-right text-right">
+<header>
+    <nav>
+    <ul class="nav-links">
+        <a href="{% url 'task_list' %}"><img src="{% static 'img/logo.png' %}" alt="logo" class="logo-img"></a>
+    </ul>
+            <ul class="auth-links">
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'settings_page' %}">
+                <li>
+                    <a href="{% url 'settings_page' %}">
                         {{ user.first_name }} {{ user.last_name }}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                <li>
+                    <a href="{% url 'login' %}">Sign In</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Sign Up</a>
+                <li>
+                    <a href="{% url 'register' %}">Sign Up</a>
                 </li>
                 {% endif %}
             </ul>
-        </div>
     </nav>
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 AlmaUniversity Community. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

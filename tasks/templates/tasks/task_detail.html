@@ -9,7 +9,9 @@
 <p><strong>Status:</strong> {{ task.get_status_display }}</p>
 <p><strong>Priority:</strong> {{ task.get_priority_display }}</p>
 <p><strong>Category:</strong> {{ task.get_category_display }}</p>
-<a href="{% url 'task_update' task.pk %}" class="btn btn-secondary">Edit</a>
-<a href="{% url 'task_delete' task.pk %}" class="btn btn-danger">Delete</a>
-<a href="{% url 'task_list' %}" class="btn btn-primary">Back to List</a>
+<div>
+    <a href="{% url 'task_update' task.pk %}">Edit</a>
+    <a href="{% url 'task_delete' task.pk %}">Delete</a>
+    <a href="{% url 'task_list' %}">Back to List</a>
+</div>
 {% endblock %}

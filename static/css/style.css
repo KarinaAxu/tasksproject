@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background: red;
+    color: white;
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links,
+.auth-links {
+    list-style-type: none;
+    padding: 0 20px;
+    display: flex;
+}
+
+.nav-links li,
+.auth-links li {
+    margin: 0 10px;
+    list-style-type: none;
+}
+
+.nav-links li a,
+.auth-links li a {
+    color: white;
+    text-decoration: none;
+    list-style-type: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.exist {
+    color: red;
+    text-align: center;
+    text-decoration: none;
+    list-style-type: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin: 10px;
+    font-weight: bold;
+}
+
+select {
+    width: 10em;
+    height: 3em;
+    padding: 5px;
+    margin: 5px;
+    font-size: 2em;
+}
+
+.main-start {
+    padding: 20px;
+    text-align: center;
+}
+
+.file-profile {
+    padding: 10px;
+    margin-left: 40px;
+    font-size: 12px;
+}
+
+.main-bloc {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.main-box {
+    flex: 1 1 30%;
+    max-width: 30%;
+    margin: 12px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    list-style-type: none;
+}
+
+.no-tasks {
+    margin-left: 22em;
+    padding-bottom: 10px;
+    list-style-type: none;
+}
+
+p, h1, h2, h3 {
+    color: black;
+    text-align: center;
+    list-style-type: none;
+    font-weight: bold;
+}
+
+.post-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.post {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #f1f1f1;
+    margin-top: auto;
+}
+
+form {
+    padding: 20px;
+    text-align: center;
+}
+
+.form-control {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+}
+
+a {
+    text-decoration: none;
+    list-style-type: none;
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;
+}
+
+button:hover {
+    background-color: #cc0000;
+}
+
+.logo-img {
+    width: 3em;
+    height: 3em;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.step-links a {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #ff0000;
+    color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.step-links .current {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+}
+
+.step-links a:hover {
+    background-color: #cc0000;
+}
+
+@media (max-width: 600px) {
+    nav ul li {
+        display: block;
+        margin: 5px 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .main-box {
+        flex: 1 1 30%;
+        max-width: 30%;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-box {
+        flex: 1 1 90%;
+        max-width: 90%;
+    }
+}

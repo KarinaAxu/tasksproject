@@ -23,11 +23,13 @@ class Task(models.Model):
 
     title = models.CharField(max_length=255, default='')
     description = models.TextField(max_length=10000, default='', blank=True)
+    assigned_to = models.ForeignKey(User, related_name='assigned_tasks', on_delete=models.CASCADE, null=True, blank=True)
     due_date = models.DateField(auto_now_add=True, null=True, blank=True)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default='NS')
-    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default='M')
-    category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default='P')
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default='')
+    priority = models.CharField(max_length=1, choices=PRIORITY_CHOICES, default='')
+    category = models.CharField(max_length=1, choices=CATEGORY_CHOICES, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
+
 
     def __str__(self):
         return f'{self.title} ({self.get_status_display()})'

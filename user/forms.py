@@ -23,6 +23,7 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'first_name', 'last_name', 'password']
         widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First name'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last name'}),
